@@ -1,0 +1,6 @@
+# File referenced in run_kuka_benchmarks.launch.py
+# From moveit2_tutorials/doc/how_to_guides/benchmarking/config/benchmarking_moveit_cpp.yaml
+
+planning_pipelines:
+  # MoveIt cpp
+  pipeline_names: ["ompl"] #, "ompl_rrtc", "stomp", "pilz_industrial_motion_planner"]

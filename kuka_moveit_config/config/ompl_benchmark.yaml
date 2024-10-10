@@ -1,0 +1,86 @@
+# File for running with ros2 run moveit_ros_benchmarks moveit_run_benchmark --config ~/ws_pcl/src/kuka_moveit_config/config/ompl_benchmark.yaml, but erroneous
+# File referenced in run_kuka_benchmarks.launch.py
+
+benchmark_config:
+  # Name of the benchmark session
+  benchmark_name: "OMPL_Benchmark_KUKA"
+
+  # Number of times to run each planner
+  runs: 10
+
+  # Timeout for each planning query (in seconds)
+  timeout: 10.0
+
+  # Set to false to avoid displaying the scene during the benchmarking process
+  display_scene: false
+
+  # OMPL planners to benchmark
+  planners:
+    - plugin: ompl_interface/OMPLPlanner
+      planner_ids:
+        - RRTConnectkConfigDefault
+        - RRTstarkConfigDefault
+        - PRMkConfigDefault
+
+  # Planning pipeline (using OMPL)
+  planning_pipeline: "ompl"
+
+  # Paths to the robot's URDF and SRDF descriptions
+  robot_description: "robot_description"
+  robot_description_semantic: "robot_description_semantic"
+
+  # Planning group
+  group_name: "kuka_arm"
+
+  # Octomap topic from octomap_server
+  octomap_topic: "/octomap_binary"
+
+  # Start state
+  start_state:
+    joint_state:
+      joint_names:
+        - joint_1
+        - joint_2
+        - joint_3
+        - joint_4
+        - joint_5
+        - joint_6
+      joint_values:
+        - 25.0
+        - 40.0
+        - 5.0
+        - 0.0
+        - 0.0
+        - 0.0
+
+  # Goal state
+  goal_state:
+    joint_state:
+      joint_names:
+        - joint_1
+        - joint_2
+        - joint_3
+        - joint_4
+        - joint_5
+        - joint_6
+      joint_values:
+        - -25.0
+        - 40.0
+        - 5.0
+        - 0.0
+        - 0.0
+        - 0.0
+
+  # # Goal state (cartesian)
+  # goal_state:
+  #   pose_goal:
+  #     link_name: "gripper_link"  # end-effector link
+  #     position:
+  #       x: 0.5
+  #       y: -0.3
+  #       z: 1.2
+  #     orientation:  # Quaternion representing no rotation
+  #       x: 0.0
+  #       y: 0.0
+  #       z: 0.0
+  #       w: 1.0

@@ -1,0 +1,37 @@
+# File referenced in run_kuka_benchmarks.launch.py
+# From moveit2_tutorials/doc/how_to_guides/benchmarking/config/benchmarks.yaml
+
+parameters:
+    name: FullBenchmark
+    runs: 1
+    group: panda_arm
+    timeout: 1.5
+    output_directory: /tmp/moveit_benchmarks/
+    start_states_regex: ready
+planning_pipelines:
+  # Benchmark tool
+  pipelines: [OMPL_ANY] #, OMPL_RRTC, CHOMP, PILZ_LIN]
+  OMPL_ANY:
+     name: ompl
+     planners:
+       - RRTConnectkConfigDefault
+       - RRTstarkConfigDefault
+       - PRMkConfigDefault
+  # OMPL_RRTC:
+  #   name: ompl_rrtc
+  #   planners:
+  #     - RRTConnectkConfigDefault
+  # CHOMP:
+  #    name: stomp
+  #    planners:
+  #      - stomp
+  # PILZ_LIN:
+  #    name: pilz_industrial_motion_planner
+  #    planners:
+  #      - LIN
+
+# No need for parallel_pipelines when benchmarking planners from within the same library (OMPL)
+  # parallel_pipelines: [ompl_pilz_chomp]
+  # ompl_pilz_chomp:
+  #   pipelines: [ompl_rrtc, stomp, pilz_industrial_motion_planner]
+  #   planner_ids: [RRTConnectkConfigDefault, stomp, LIN]
